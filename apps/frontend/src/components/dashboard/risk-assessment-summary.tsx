@@ -1,6 +1,3 @@
-## File 16: apps/frontend/src/components/dashboard/risk-assessment-summary.tsx
-
-```tsx
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -156,4 +153,3 @@ export function RiskAssessmentSummary() {
     </Card>
   );
 }
-```
