@@ -1,6 +1,3 @@
-## File 13: apps/frontend/src/components/dashboard/dashboard-sidebar.tsx
-
-```tsx
 import { cn } from '@/lib/utils';
 import { Logo } from '@/components/logo';
 import { Button } from '@/components/ui/button';
@@ -181,4 +178,3 @@ export function DashboardSidebar({ className, ...props }: DashboardSidebarProps)
     </div>
   );
 }
-```
