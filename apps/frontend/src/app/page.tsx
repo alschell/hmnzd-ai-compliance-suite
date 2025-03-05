@@ -1,9 +1,3 @@
-Current Date and Time: 2025-03-05 04:02:40 UTC
-Current User's Login: alschell
-
-## File 10: apps/frontend/src/app/page.tsx
-
-```tsx
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -99,4 +93,3 @@ export default function HomePage() {
     </div>
   );
 }
-```
