@@ -1,9 +1,3 @@
-Current Date and Time: 2025-03-05 04:03:40 UTC
-Current User's Login: alschell
-
-## File 12: apps/frontend/src/components/dashboard/dashboard-shell.tsx
-
-```tsx
 import { ReactNode } from 'react';
 import { DashboardSidebar } from '@/components/dashboard/dashboard-sidebar';
 import { DashboardNav } from '@/components/dashboard/dashboard-nav';
@@ -77,4 +71,3 @@ export function DashboardShell({ children }: DashboardShellProps) {
     </div>
   );
 }
-```
