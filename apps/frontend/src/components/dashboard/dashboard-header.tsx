@@ -1,6 +1,3 @@
-## File 14: apps/frontend/src/components/dashboard/dashboard-header.tsx
-
-```tsx
 import { Button } from '@/components/ui/button';
 import { Heading } from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
@@ -68,4 +65,3 @@ export function DashboardHeader({
     </div>
   );
 }
-```
