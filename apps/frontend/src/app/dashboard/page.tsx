@@ -1,95 +1,64 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { Button } from '@/components/ui/button';
-import { HeroSection } from '@/components/landing/hero-section';
-import { FeaturesSection } from '@/components/landing/features-section';
-import { PricingSection } from '@/components/landing/pricing-section';
-import { TestimonialsSection } from '@/components/landing/testimonials-section';
-import { FAQSection } from '@/components/landing/faq-section';
-import { CTASection } from '@/components/landing/cta-section';
-import { RegulatoryNewsFeed } from '@/components/landing/regulatory-news-feed';
-import { ComplianceScoreDemo } from '@/components/landing/compliance-score-demo';
-import { AIFeatureShowcase } from '@/components/landing/ai-feature-showcase';
-import { LandingHeader } from '@/components/landing/landing-header';
-import { LandingFooter } from '@/components/landing/landing-footer';
-import { ArrowRight, Shield, Globe, CheckCircle } from 'lucide-react';
+import { Metadata } from 'next';
+import { DashboardShell } from '@/components/dashboard/dashboard-shell';
+import { DashboardHeader } from '@/components/dashboard/dashboard-header';
+import { ComplianceScoreCard } from '@/components/dashboard/compliance-score-card';
+import { RegulatoryUpdates } from '@/components/dashboard/regulatory-updates';
+import { ComplianceTasks } from '@/components/dashboard/compliance-tasks';
+import { RiskAssessmentSummary } from '@/components/dashboard/risk-assessment-summary';
+import { QuickActions } from '@/components/dashboard/quick-actions';
+import { RecentAlerts } from '@/components/dashboard/recent-alerts';
+import { AiInsights } from '@/components/dashboard/ai-insights';
+import { UpcomingDeadlines } from '@/components/dashboard/upcoming-deadlines';
+import { ComplianceTrendChart } from '@/components/dashboard/compliance-trend-chart';
 
-export default function HomePage() {
+export const metadata: Metadata = {
+  title: 'Dashboard',
+  description: 'HMNZD AI Compliance Suite Dashboard',
+};
+
+export default async function DashboardPage() {
+  // In a real implementation, this data would come from API calls
+  // For now, we'll mock the data but structure it as if it came from real APIs
+  
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
-      <LandingHeader />
+    <DashboardShell>
+      <DashboardHeader
+        heading="Compliance Dashboard"
+        text="Your enterprise compliance overview and key metrics"
+      />
       
-      <main>
-        <HeroSection />
-        
-        {/* Quick Overview */}
-        <section className="container py-12 md:py-20">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-card border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-all interactive-card">
-              <Shield className="h-12 w-12 text-primary mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Comprehensive Coverage</h3>
-              <p className="text-muted-foreground mb-4">Manage compliance across GDPR, CCPA, HIPAA, ISO27001, SOX, and 37+ other regulatory frameworks.</p>
-              <Link href="/frameworks" className="text-primary inline-flex items-center">
-                Explore Frameworks <ArrowRight className="ml-1 h-4 w-4" />
-              </Link>
-            </div>
-            
-            <div className="bg-card border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-all interactive-card">
-              <Globe className="h-12 w-12 text-primary mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Global Compliance</h3>
-              <p className="text-muted-foreground mb-4">Operate confidently in 67 jurisdictions with real-time regulatory updates and localized guidance.</p>
-              <Link href="/global-compliance" className="text-primary inline-flex items-center">
-                View Coverage Map <ArrowRight className="ml-1 h-4 w-4" />
-              </Link>
-            </div>
-            
-            <div className="bg-card border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-all interactive-card">
-              <CheckCircle className="h-12 w-12 text-primary mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Automated Compliance</h3>
-              <p className="text-muted-foreground mb-4">Reduce manual work by 87% with AI-powered assessments, monitoring, and remediation workflows.</p>
-              <Link href="/automation" className="text-primary inline-flex items-center">
-                See Automation <ArrowRight className="ml-1 h-4 w-4" />
-              </Link>
-            </div>
+      {/* Top row: Cards with important metrics */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <ComplianceScoreCard />
+        <RiskAssessmentSummary />
+        <UpcomingDeadlines />
+      </div>
+
+      {/* Middle section: Detailed content */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <div className="col-span-2">
+          <ComplianceTrendChart />
+        </div>
+        <div className="col-span-1">
+          <AiInsights />
+        </div>
+      </div>
+
+      {/* Bottom section: Lists and activity */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-1">
+          <ComplianceTasks />
+        </div>
+        <div className="lg:col-span-1">
+          <RegulatoryUpdates />
+        </div>
+        <div className="lg:col-span-1">
+          <div className="flex flex-col gap-6">
+            <RecentAlerts />
+            <QuickActions />
           </div>
-        </section>
-        
-        <FeaturesSection />
-        
-        <AIFeatureShowcase />
-        
-        <ComplianceScoreDemo />
-        
-        <RegulatoryNewsFeed />
-        
-        <PricingSection />
-        
-        <TestimonialsSection />
-        
-        <FAQSection />
-        
-        {/* Trust Signals */}
-        <section className="container py-12 border-t border-border">
-          <h3 className="text-center text-lg text-muted-foreground mb-8">Trusted by Leading Organizations</h3>
-          <div className="flex flex-wrap justify-center gap-8 items-center opacity-70">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="w-[120px] md:w-[140px] h-12 relative">
-                <Image 
-                  src={`/images/logos/client-logo-${i}.svg`} 
-                  alt={`Client logo ${i}`}
-                  fill
-                  style={{ objectFit: 'contain' }}
-                  className="filter grayscale"
-                />
-              </div>
-            ))}
-          </div>
-        </section>
-        
-        <CTASection />
-      </main>
-      
-      <LandingFooter />
-    </div>
+        </div>
+      </div>
+    </DashboardShell>
   );
 }
