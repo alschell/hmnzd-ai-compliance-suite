@@ -1,6 +1,3 @@
-## File 22: apps/frontend/src/components/dashboard/dashboard-nav.tsx
-
-```tsx
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
@@ -88,4 +85,3 @@ export function DashboardNav({ className, ...props }: DashboardNavProps) {
     </div>
   );
 }
-```
