@@ -314,3 +314,84 @@ export function useTrainingCompliance() {
           {
             id: "training-006",
             title: "AI
+          },
+          {
+            id: "training-006",
+            title: "AI Model Risk Management",
+            description: "Learn best practices for managing risks associated with AI models, including model validation, monitoring, and governance frameworks.",
+            category: "AI Ethics",
+            isRequired: true,
+            dueDate: "2025-04-30T23:59:59Z",
+            duration: 90,
+            assignedCount: 120,
+            completedCount: 95,
+            inProgressCount: 15,
+            notStartedCount: 10
+          },
+          {
+            id: "training-007",
+            title: "Secure Coding Practices",
+            description: "Essential security practices for developers to build secure applications and prevent common vulnerabilities like SQL injection, XSS, and CSRF.",
+            category: "Information Security",
+            isRequired: true,
+            dueDate: "2025-05-15T23:59:59Z",
+            duration: 120,
+            assignedCount: 60,
+            completedCount: 48,
+            inProgressCount: 7,
+            notStartedCount: 5
+          }
+        ];
+        
+        // Calculate summary metrics
+        const totalTrainings = mockTrainings.length;
+        const completedTrainings = mockTrainings.reduce((sum, training) => sum + training.completedCount, 0);
+        const inProgressTrainings = mockTrainings.reduce((sum, training) => sum + training.inProgressCount, 0);
+        const notStartedTrainings = mockTrainings.reduce((sum, training) => sum + training.notStartedCount, 0);
+        const totalAssigned = mockTrainings.reduce((sum, training) => sum + training.assignedCount, 0);
+        
+        // Calculate overdue trainings
+        const overdueTrainings = mockTrainings.filter(training => 
+          training.dueDate && new Date(training.dueDate) < currentDate
+        ).reduce((sum, training) => sum + (training.assignedCount - training.completedCount), 0);
+        
+        // Calculate compliance rate
+        const complianceRate = Math.round((completedTrainings / totalAssigned) * 100);
+        
+        // Calculate employee compliance
+        const totalEmployees = 220; // Mock total employee count
+        const compliantEmployees = totalEmployees - mockNonCompliantUsers.length;
+        const nonCompliantEmployees = mockNonCompliantUsers.length;
+
+        setData({
+          complianceRate,
+          completedTrainings,
+          inProgressTrainings,
+          overdueTrainings,
+          totalTrainings,
+          compliantEmployees,
+          nonCompliantEmployees,
+          totalEmployees,
+          categories: mockCategories,
+          upcomingDeadlines: mockDeadlines,
+          nonCompliantUsers: mockNonCompliantUsers,
+          departmentCompliance: mockDepartmentCompliance,
+          trainings: mockTrainings
+        });
+      } catch (err) {
+        setError(err instanceof Error ? err : new Error('Failed to fetch training compliance data'));
+        console.error('Error fetching training compliance data:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchTrainingCompliance();
+  }, []);
+
+  return {
+    data,
+    isLoading,
+    error
+  };
+}
