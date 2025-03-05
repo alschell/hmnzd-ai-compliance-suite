@@ -46,30 +46,3 @@ HMNZD AI Compliance Suite is a cutting-edge holistic compliance platform coverin
 ```bash
 git clone https://github.com/alschell/hmnzd-compliance-suite.git
 cd hmnzd-compliance-suite
-
-Architecture
-HMNZD AI Compliance Suite is built on a microservices architecture with autonomous compliance agents that continuously monitor regulatory changes and business operations.
-
-Key Components
-API Gateway - Central entry point for all client applications
-Auth Service - Identity management and access control with MFA
-Compliance Services - Framework-specific compliance engines
-Consent Management - User consent and preference management
-Contract Analysis - AI-powered contract review and risk assessment
-Regulatory Intelligence - Real-time regulatory change monitoring
-Risk Assessment - Continuous compliance risk evaluation
-Analytics Engine - Advanced compliance reporting and insights
-AI Orchestrator - Coordination of autonomous compliance agents
-Documentation
-For detailed documentation, visit docs/.
-
-Contributing
-Please read CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.
-
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-Acknowledgements
-OpenAI for advanced language model capabilities
-Neo4j for the powerful graph database
-The open-source community for the amazing tools that make this possible
