@@ -1,9 +1,3 @@
-Current Date and Time: 2025-03-05 05:34:24 UTC
-Current User's Login: alschell
-
-## File 19: apps/frontend/src/components/dashboard/regulatory-updates.tsx
-
-```tsx
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
@@ -178,4 +172,3 @@ export function RegulatoryUpdates() {
     </Card>
   );
 }
-```
