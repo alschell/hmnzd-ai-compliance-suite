@@ -23,7 +23,9 @@ import {
   ChevronRight,
   Search,
   Filter,
-  PlusCircle
+  PlusCircle,
+  Download,
+  FileText
 } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
@@ -573,4 +575,214 @@ export function EmployeeComplianceProfile() {
                                     <span className="ml-1">{doc.approvedBy || 'N/A'}</span>
                                   </div>
                                   <div>
-                                    <span className="text-m
+                                    <span className="text-muted-foreground">Document ID:</span>
+                                    <span className="ml-1">{doc.documentId || 'N/A'}</span>
+                                  </div>
+                                </div>
+                              )}
+                              
+                              <div className="flex justify-end space-x-2 mt-3">
+                                {doc.status === "Compliant" && doc.fileUrl && (
+                                  <Button variant="outline" size="sm" className="text-xs gap-1" asChild>
+                                    <a href={doc.fileUrl} target="_blank" rel="noopener noreferrer">
+                                      <Download className="h-3 w-3 mr-1" />
+                                      Download
+                                    </a>
+                                  </Button>
+                                )}
+                                
+                                {doc.status !== "Compliant" && (
+                                  <Button variant="default" size="sm" className="text-xs">
+                                    Upload Document
+                                  </Button>
+                                )}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </TabsContent>
+                  
+                  <TabsContent value="access" className="mt-4 space-y-4">
+                    <div className="flex justify-between mb-2">
+                      <h3 className="text-sm font-medium flex items-center">
+                        <Shield className="h-4 w-4 mr-2" />
+                        System Access Rights
+                      </h3>
+                      <Button variant="outline" size="sm" className="h-7 text-xs">
+                        Request Access Change
+                      </Button>
+                    </div>
+                    
+                    <div className="border rounded-md overflow-hidden">
+                      <div className="bg-muted p-3 flex items-center justify-between">
+                        <h4 className="text-sm font-medium">Access Rights Overview</h4>
+                        <Badge variant="secondary">Last reviewed: {formatDate(data.accessRights.lastReviewDate)}</Badge>
+                      </div>
+                      
+                      <div className="p-3">
+                        <div className="space-y-4">
+                          <div>
+                            <div className="flex items-center justify-between text-sm mb-1">
+                              <span>Access Rights Review Status</span>
+                              <span>{data.accessRights.reviewedPercent}%</span>
+                            </div>
+                            <Progress 
+                              value={data.accessRights.reviewedPercent} 
+                              className="h-2"
+                              indicatorClassName={
+                                data.accessRights.reviewedPercent >= 90 ? "bg-green-600" :
+                                data.accessRights.reviewedPercent >= 70 ? "bg-amber-500" :
+                                "bg-red-500"
+                                              }
+                            />
+                          </div>
+                          
+                          <div className="grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                              <p className="text-muted-foreground text-xs mb-1">Next Scheduled Review</p>
+                              <p>{formatDate(data.accessRights.nextReviewDate)}</p>
+                            </div>
+                            <div>
+                              <p className="text-muted-foreground text-xs mb-1">Reviewer</p>
+                              <p>{data.accessRights.reviewer || 'Not assigned'}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      {data.accessRights.systems.map((system, index) => (
+                        <div key={index} className="border rounded-md overflow-hidden">
+                          <button
+                            className="w-full text-left p-3 hover:bg-muted/30 transition-colors"
+                            onClick={() => toggleSection(`access-${index}`)}
+                          >
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <h4 className="text-sm font-medium">{system.name}</h4>
+                                <p className="text-xs text-muted-foreground">{system.category}</p>
+                              </div>
+                              <div className="flex items-center space-x-3">
+                                <div className="text-right">
+                                  {getStatusBadge(system.status)}
+                                  <p className="text-xs text-muted-foreground mt-1">
+                                    Last reviewed: {formatDate(system.lastReviewDate)}
+                                  </p>
+                                </div>
+                                {expandedSections[`access-${index}`] ? (
+                                  <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                                ) : (
+                                  <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                                )}
+                              </div>
+                            </div>
+                          </button>
+                          
+                          {expandedSections[`access-${index}`] && (
+                            <div className="p-3 pt-0 border-t bg-muted/20">
+                              <div className="mt-3 space-y-3">
+                                <div>
+                                  <h5 className="text-xs font-medium">Access Level</h5>
+                                  <p className="text-sm">{system.accessLevel}</p>
+                                </div>
+                                
+                                {system.permissions && system.permissions.length > 0 && (
+                                  <div>
+                                    <h5 className="text-xs font-medium">Permissions</h5>
+                                    <div className="flex flex-wrap gap-1 mt-1">
+                                      {system.permissions.map((permission, i) => (
+                                        <Badge key={i} variant="secondary" className="text-xs">
+                                          {permission}
+                                        </Badge>
+                                      ))}
+                                    </div>
+                                  </div>
+                                )}
+                                <div className="grid grid-cols-2 gap-4 text-xs">
+                                  <div>
+                                    <span className="text-muted-foreground">Grant Date:</span>
+                                    <span className="ml-1">{formatDate(system.grantDate)}</span>
+                                  </div>
+                                  <div>
+                                    <span className="text-muted-foreground">Expiry Date:</span>
+                                    <span className="ml-1">{system.expiryDate ? formatDate(system.expiryDate) : 'No expiration'}</span>
+                                  </div>
+                                  <div>
+                                    <span className="text-muted-foreground">Approved By:</span>
+                                    <span className="ml-1">{system.approvedBy}</span>
+                                  </div>
+                                  <div>
+                                    <span className="text-muted-foreground">Last Access:</span>
+                                    <span className="ml-1">{formatDate(system.lastAccessDate)}</span>
+                                  </div>
+                                </div>
+                                
+                                <div className="flex justify-end mt-2">
+                                  <Button variant="outline" size="sm" className="text-xs">
+                                    Review Access
+                                  </Button>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                    
+                    {data.accessRights.pendingRequests && data.accessRights.pendingRequests.length > 0 && (
+                      <div className="border rounded-md overflow-hidden">
+                        <div className="bg-muted p-3">
+                          <h4 className="text-sm font-medium">Pending Access Requests</h4>
+                        </div>
+                        <div className="divide-y">
+                          {data.accessRights.pendingRequests.map((request, index) => (
+                            <div key={index} className="p-3">
+                              <div className="flex items-center justify-between">
+                                <div>
+                                  <h5 className="text-sm font-medium">{request.system}</h5>
+                                  <p className="text-xs text-muted-foreground mt-1">{request.accessLevel}</p>
+                                </div>
+                                <Badge className="bg-blue-100 text-blue-800">Pending</Badge>
+                              </div>
+                              <div className="flex items-center justify-between mt-2 text-xs">
+                                <div className="text-muted-foreground">
+                                  Requested: {formatDate(request.requestDate)}
+                                </div>
+                                <Button variant="ghost" size="sm" className="h-7 text-xs">
+                                  View Details
+                                </Button>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </TabsContent>
+                </Tabs>
+              </>
+            )}
+          </div>
+        </div>
+      </CardContent>
+      <CardFooter className="border-t bg-muted/50">
+        <div className="w-full flex items-center justify-between">
+          <div className="text-xs text-muted-foreground">
+            Last updated: March 5, 2025 at 08:07:36 UTC
+          </div>
+          <div className="flex space-x-2">
+            <Button variant="outline" size="sm" className="text-xs gap-1">
+              <FileText className="h-3.5 w-3.5 mr-1" />
+              Export Profile
+            </Button>
+            <Button variant="default" size="sm" className="text-xs">
+              Generate Compliance Report
+            </Button>
+          </div>
+        </div>
+      </CardFooter>
+    </Card>
+  );
+}
