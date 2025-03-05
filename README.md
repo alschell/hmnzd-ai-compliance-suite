@@ -41,6 +41,31 @@ HMNZD AI Compliance Suite is a cutting-edge holistic compliance platform coverin
 
 ### Installation
 
+Install dependencies
+bash
+pnpm install
+Set up environment variables
+bash
+cp .env.example .env
+Start the development environment
+bash
+pnpm dev
+This will start all necessary services using Docker Compose and the frontend application.
+
+Architecture
+HMNZD AI Compliance Suite is built on a microservices architecture with autonomous compliance agents that continuously monitor regulatory changes and business operations.
+
+Key Components
+API Gateway - Central entry point for all client applications
+Auth Service - Identity management and access control with MFA
+Compliance Services - Framework-specific compliance engines
+Consent Management - User consent and preference management
+Contract Analysis - AI-powered contract review and risk assessment
+Regulatory Intelligence - Real-time regulatory change monitoring
+Risk Assessment - Continuous compliance risk evaluation
+Analytics Engine - Advanced compliance reporting and insights
+AI Orchestrator - Coordination of autonomous compliance agents
+
 1. Clone the repository
 
 ```bash
