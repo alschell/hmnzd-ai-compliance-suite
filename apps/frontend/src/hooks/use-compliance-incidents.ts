@@ -256,7 +256,83 @@ export function useComplianceIncidents() {
               }
             ]
           },
-          {
+{
+  id: "incident-004",
+  referenceId: "INC-2025-004",
+  title: "Missing Data Subject Access Request Response",
+  description: "A data subject access request (DSAR) from a European customer was not responded to within the required 30-day timeframe as specified by GDPR.",
+  status: "Resolved",
+  severity: "Medium",
+  type: "Data Privacy",
+  reportedAt: "2025-02-15T09:20:00Z",
+  reportedBy: {
+    id: "user-006",
+    name: "Jamie Garcia",
+    avatarUrl: "/avatars/jamie-garcia.png"
+  },
+  assignedTo: {
+    id: "user-001",
+    name: "Alex Schell",
+    username: "alschell",
+    avatarUrl: "/avatars/alex-schell.png"
+  },
+  relatedFrameworks: ["GDPR"],
+  timeline: [
+    {
+      timestamp: "2025-02-15T09:20:00Z",
+      description: "Incident reported by Privacy Officer",
+      user: "Jamie Garcia",
+      type: "comment"
+    },
+    {
+      timestamp: "2025-02-15T10:30:00Z",
+      description: "Assigned to Alex for investigation",
+      user: "Jamie Garcia",
+      type: "assignment"
+    },
+    {
+      timestamp: "2025-02-16T14:45:00Z",
+      description: "Investigation complete - request was missed due to misconfigured notification system",
+      user: "Alex Schell",
+      type: "comment"
+    },
+    {
+      timestamp: "2025-03-01T11:30:00Z",
+      description: "DSAR request fulfilled and response sent to customer",
+      user: "Alex Schell",
+      type: "comment"
+    },
+    {
+      timestamp: "2025-03-02T09:15:00Z",
+      description: "Status updated to Resolved",
+      user: "Alex Schell",
+      type: "status_change"
+    }
+  ],
+  actions: [
+    {
+      id: "action-009",
+      description: "Process the DSAR and provide data to customer",
+      dueDate: "2025-02-28T23:59:59Z",
+      assignedTo: "Alex Schell",
+      completed: true
+    },
+    {
+      id: "action-010",
+      description: "Fix notification system configuration",
+      dueDate: "2025-02-20T23:59:59Z",
+      assignedTo: "IT Support",
+      completed: true
+    },
+    {
+      id: "action-011",
+      description: "Update DSAR process documentation",
+      dueDate: "2025-03-05T23:59:59Z",
+      assignedTo: "Privacy Team",
+      completed: true
+    }
+  ]
+}
             id: "incident-004",
             referenceId: "INC-2025-004",
             title: "Missing Data Subject Access Request Response",
