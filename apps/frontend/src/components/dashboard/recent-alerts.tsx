@@ -1,9 +1,3 @@
-Current Date and Time: 2025-03-05 05:35:37 UTC
-Current User's Login: alschell
-
-## File 20: apps/frontend/src/components/dashboard/recent-alerts.tsx
-
-```tsx
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -174,4 +168,3 @@ export function RecentAlerts() {
     </Card>
   );
 }
-```
